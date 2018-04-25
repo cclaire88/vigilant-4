@@ -5,12 +5,14 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -43,7 +45,19 @@ public class FirstActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
+        alert.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+
+
+            @Override
+
+
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        })
+                .setMessage("Vigilant is taking you to a page under the facade of an Instagram account. Check the caption below for button functionalities.")
+                .show();
         FloatingActionButton first_button = (FloatingActionButton) findViewById(R.id.first_button);
         FloatingActionButton second_button = (FloatingActionButton) findViewById(R.id.second_button);
         FloatingActionButton third_button = (FloatingActionButton) findViewById(R.id.third_button);

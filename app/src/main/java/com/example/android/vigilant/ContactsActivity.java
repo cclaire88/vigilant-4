@@ -95,6 +95,7 @@ public class ContactsActivity extends AppCompatActivity implements AdapterView.O
                         Intent sendstoredcontacts = new Intent(ContactsActivity.this, FirstActivity.class);
                         sendstoredcontacts.putStringArrayListExtra("CONTACTS", store); // getText() SHOULD NOT be static!!!
                         startActivity(sendstoredcontacts);
+
                     }
                 }
                 else {

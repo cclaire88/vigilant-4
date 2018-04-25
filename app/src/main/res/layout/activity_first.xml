@@ -32,12 +32,11 @@
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
+                android:layout_width="1000dp"
                 android:layout_height="375dp"
 
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="7dp"
-                app:srcCompat="@drawable/talia_2" />
+                app:srcCompat="@drawable/talia7" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/third_button"

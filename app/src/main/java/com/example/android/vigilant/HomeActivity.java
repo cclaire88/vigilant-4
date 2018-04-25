@@ -54,50 +54,42 @@ public class HomeActivity extends AppCompatActivity {
 
     private static final int CAMERA_REQUEST = 1888;
     Button buttonStart, buttonStop, buttonPlayLastRecordAudio,
-            buttonStopPlayingRecording ;
+            buttonStopPlayingRecording;
     String AudioSavePathInDevice = null;
-    MediaRecorder mediaRecorder ;
-    Random random ;
+    MediaRecorder mediaRecorder;
+    Random random;
     String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     public static final int RequestPermissionCode = 1;
-    MediaPlayer mediaPlayer ;
+    MediaPlayer mediaPlayer;
     String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first);
+        setContentView(R.layout.activity_home);
 
         Button go_back_button = (Button) findViewById(R.id.button8);
         Button go_to_contacts = (Button) findViewById(R.id.button7);
 
         final ArrayList<String> contacts = getIntent().getStringArrayListExtra("CONTACTSLIST");
 
-        Button location_button = (Button)findViewById(R.id.button5);
+        Button location_button = (Button) this.findViewById(R.id.button5);
 
-        /* location_button.setOnClickListener(new View.OnClickListener() {
-                                               @Override
-                                               public void onClick(View v) {
-                                                   sendSMS("CONTACTSLIST", message);
-                                               }
-                                           }); */
+
         location_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (checkPermissionText(Manifest.permission.SEND_SMS)) {
 
+
+                if (checkPermissionText(Manifest.permission.SEND_SMS)) {
 
                     // TODO GET THIS INTENT RECIEVER TO WORK
 
-
-
                     //String[] contacts = getIntent().getExtras().getStringArray("CONTACTS");
-
                     //String[] contacts = new String[] {"3345", "5554", "5556"};
 
-
-                    for(int i = 0; i < contacts.size(); i++) {
+                    for (int i = 0; i < contacts.size(); i++) {
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(contacts.get(i), null, message, null, null);
                     }
@@ -109,10 +101,11 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-
-
-
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, new LocationListener() {
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
@@ -130,15 +123,17 @@ public class HomeActivity extends AppCompatActivity {
             public void onLocationChanged(final Location location) {
             }
 
+
         });
 
 
 
-        Location myLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+
+        /*Location myLocation = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
         double longitude = myLocation.getLongitude();
         double latitude = myLocation.getLatitude();
 
-        message += "This is my location: " + "https://www.google.co.id/maps/@" + latitude + "," + longitude;
+        message += "This is my location: " + "https://www.google.co.id/maps/@" + latitude + "," + longitude;*/
 
 
 
@@ -169,10 +164,6 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
 
         buttonStart = (Button) findViewById(R.id.button);
         buttonStop = (Button) findViewById(R.id.button2);
@@ -273,21 +264,18 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-    Button button6= (Button) findViewById(R.id.button6);
-    button6.setOnClickListener(new View.OnClickListener() {
-        public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.addCategory(Intent.CATEGORY_BROWSABLE);
-            intent.setData(Uri.parse("http://www.wix.com"));
-            startActivity(intent);
-        }});
+        Button button6= (Button) findViewById(R.id.button6);
+        button6.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://clairejung7.wixsite.com/vigilant"));
+                startActivity(intent);
+            }});
     }
 
-     private void sendSMS(String phoneNumber, String message) {
-        SmsManager sms = SmsManager.getDefault();
-        sms.sendTextMessage(phoneNumber, null, message, null, null);
-    }
+
 
     public void MediaRecorderReady(){
         mediaRecorder=new MediaRecorder();
@@ -363,7 +351,7 @@ public class HomeActivity extends AppCompatActivity {
             MediaStore.Images.Media.insertImage(getContentResolver(), photo, "Photo" , "Photo take through Vigilant");
 
         }
-            }
+    }
 
 
 
